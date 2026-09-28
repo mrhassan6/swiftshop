@@ -1,0 +1,59 @@
+<!-- wp:html -->
+<div id="swiftshop-cart-backdrop" class="swiftshop-cart-backdrop" hidden></div>
+
+<aside id="swiftshop-cart-drawer" class="swiftshop-cart-drawer" role="dialog" aria-modal="true" aria-labelledby="swiftshop-drawer-heading" hidden>
+	<div class="swiftshop-drawer-header">
+		<h3 id="swiftshop-drawer-heading" class="swiftshop-drawer-title">Shopping Cart</h3>
+		<button class="swiftshop-drawer-close" aria-label="Close Cart">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<line x1="18" y1="6" x2="6" y2="18"></line>
+				<line x1="6" y1="6" x2="18" y2="18"></line>
+			</svg>
+		</button>
+	</div>
+
+	<div class="swiftshop-drawer-body">
+		<!-- Free Shipping Bar inside Drawer -->
+		<div class="swiftshop-free-shipping-bar">
+			<div class="swiftshop-fs-message">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<rect x="1" y="3" width="15" height="13"></rect>
+					<polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+					<circle cx="5.5" cy="18.5" r="2.5"></circle>
+					<circle cx="18.5" cy="18.5" r="2.5"></circle>
+				</svg>
+				<span>Add items to qualify for Free Shipping!</span>
+			</div>
+			<div class="swiftshop-fs-track">
+				<div class="swiftshop-fs-fill" style="width: 0%;"></div>
+			</div>
+		</div>
+
+		<!-- Cart Items list container populated via fragments / AJAX -->
+		<div class="swiftshop-drawer-body-inner">
+			<div class="swiftshop-cart-empty-state">
+				<svg class="swiftshop-empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="8" cy="21" r="1"></circle>
+					<circle cx="19" cy="21" r="1"></circle>
+					<path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+				</svg>
+				<p class="swiftshop-cart-empty-text" style="font-weight:600;margin-bottom:0.35rem;">Your bag is currently empty</p>
+				<p style="font-size:0.875rem;color:var(--wp--preset--color--text-muted);margin-bottom:1.5rem;">Take your time exploring our hand-crafted new arrivals.</p>
+				<a href="./shop" class="wp-element-button swiftshop-shop-link" style="padding:0.65rem 1.5rem;font-size:0.875rem;text-decoration:none;">Discover Goods &rarr;</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="swiftshop-drawer-footer">
+		<div class="swiftshop-drawer-subtotal-row">
+			<span>Subtotal</span>
+			<div class="swiftshop-drawer-subtotal-amount">
+				<span>$0.00</span>
+			</div>
+		</div>
+		<p class="swiftshop-drawer-tax-notice">Taxes &amp; shipping calculated at checkout &bull; 🌿 Plastic-free packaging.</p>
+		<a href="#checkout" class="swiftshop-drawer-checkout-btn">Proceed to Checkout &rarr;</a>
+		<a href="#cart" class="swiftshop-drawer-viewcart-btn">View Cart</a>
+	</div>
+</aside>
+<!-- /wp:html -->

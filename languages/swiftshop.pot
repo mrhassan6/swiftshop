@@ -1,0 +1,315 @@
+# Copyright (C) 2026 SwiftShop Core Team
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: SwiftShop 1.0.0\n"
+"Report-Msgid-Bugs-To: https://swiftshop.dev/support\n"
+"Last-Translator: SwiftShop Core Team <support@swiftshop.dev>\n"
+"Language-Team: English <support@swiftshop.dev>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-24T07:45:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: swiftshop\n"
+
+#: functions.php:84
+msgid "SwiftShop: Conversion Boosters"
+msgstr ""
+
+#: functions.php:85
+msgid "High-converting e-commerce patterns like sticky add to cart and trust badges."
+msgstr ""
+
+#: functions.php:93
+msgid "SwiftShop: E-Commerce Layouts"
+msgstr ""
+
+#: functions.php:94
+msgid "Product catalogs, banners, and cart drawer layouts."
+msgstr ""
+
+#: functions.php:107
+msgid "Pill Button"
+msgstr ""
+
+#: functions.php:115
+msgid "Outline Button"
+msgstr ""
+
+#: functions.php:123
+msgid "Elevated Card"
+msgstr ""
+
+#: functions.php:168
+msgid "Congratulations! You unlocked Free Shipping!"
+msgstr ""
+
+#: functions.php:169
+#, php-format
+msgid "Add %s more to get Free Shipping!"
+msgstr ""
+
+#: functions.php:170
+msgid "Your cart is currently empty."
+msgstr ""
+
+#: functions.php:171
+msgid "Close Cart"
+msgstr ""
+
+#: functions.php:289
+msgid "Your bag is currently empty"
+msgstr ""
+
+#: functions.php:290
+msgid "Take your time exploring our hand-crafted new arrivals."
+msgstr ""
+
+#: functions.php:293
+msgid "Discover Goods"
+msgstr ""
+
+#: functions.php:265
+#, php-format
+msgid "Remove %s from cart"
+msgstr ""
+
+#: functions.php:269
+msgid "Remove"
+msgstr ""
+
+#: functions.php:285
+msgid "Security check failed."
+msgstr ""
+
+#: functions.php:289
+msgid "WooCommerce is not active."
+msgstr ""
+
+#: patterns/sticky-add-to-cart.php:23
+msgid "Quick Purchase Bar"
+msgstr ""
+
+#: patterns/sticky-add-to-cart.php:48
+msgid "Add to Cart"
+msgstr ""
+
+#: patterns/free-shipping-progress.php:33
+msgid "Free Shipping Promotion"
+msgstr ""
+
+#: patterns/trust-badges.php:20
+msgid "Customer Guarantees and Trust Badges"
+msgstr ""
+
+#: patterns/trust-badges.php:28
+msgid "Ethically Sourced"
+msgstr ""
+
+#: patterns/trust-badges.php:29
+msgid "Consciously made by artisans"
+msgstr ""
+
+#: patterns/trust-badges.php:43
+msgid "Carbon-Neutral Delivery"
+msgstr ""
+
+#: patterns/trust-badges.php:44
+msgid "Free on orders over $75"
+msgstr ""
+
+#: patterns/trust-badges.php:56
+msgid "30-Day Happiness Guarantee"
+msgstr ""
+
+#: patterns/trust-badges.php:57
+msgid "Effortless, friendly returns"
+msgstr ""
+
+#: patterns/trust-badges.php:68
+msgid "Real Human Support"
+msgstr ""
+
+#: patterns/trust-badges.php:69
+msgid "Friendly help around the clock"
+msgstr ""
+
+#: patterns/hero-banner.php:30
+msgid "✨ New Season Arrivals"
+msgstr ""
+
+#: patterns/hero-banner.php:36
+msgid "Mindful Design for Everyday Living."
+msgstr ""
+
+#: patterns/hero-banner.php:40
+msgid "Thoughtfully crafted goods designed with enduring craftsmanship, natural materials, and carbon-neutral worldwide shipping."
+msgstr ""
+
+#: patterns/hero-banner.php:46
+msgid "Explore Collection"
+msgstr ""
+
+#: patterns/hero-banner.php:50
+msgid "View Seasonal Deals"
+msgstr ""
+
+#: patterns/hero-banner.php:62
+msgid "SwiftShop Featured Collection"
+msgstr ""
+
+#: patterns/featured-categories.php:27
+msgid "Curated Collections"
+msgstr ""
+
+#: patterns/featured-categories.php:30
+msgid "Explore essentials crafted with intentional design and everyday comfort in mind."
+msgstr ""
+
+#: patterns/featured-categories.php:35
+msgid "View All Categories"
+msgstr ""
+
+#: patterns/featured-categories.php:50
+msgid "Apparel"
+msgstr ""
+
+#: patterns/featured-categories.php:53
+msgid "Organic tees & chore jackets"
+msgstr ""
+
+#: patterns/featured-categories.php:56
+#: patterns/featured-categories.php:77
+#: patterns/featured-categories.php:98
+#: patterns/featured-categories.php:119
+msgid "Explore"
+msgstr ""
+
+#: patterns/featured-categories.php:71
+msgid "Footwear"
+msgstr ""
+
+#: patterns/featured-categories.php:74
+msgid "Leather sneakers & boots"
+msgstr ""
+
+#: patterns/featured-categories.php:92
+msgid "Accessories"
+msgstr ""
+
+#: patterns/featured-categories.php:95
+msgid "Canvas totes & wallets"
+msgstr ""
+
+#: patterns/featured-categories.php:113
+msgid "Home Goods"
+msgstr ""
+
+#: patterns/featured-categories.php:116
+msgid "Ceramics & linen throws"
+msgstr ""
+
+#: patterns/newsletter-signup.php:26
+msgid "VIP Community Perks"
+msgstr ""
+
+#: patterns/newsletter-signup.php:30
+msgid "Receive 10% Off Your First Purchase"
+msgstr ""
+
+#: patterns/newsletter-signup.php:34
+msgid "Join our insider club for exclusive product drops, member-only flash events, and styling guides."
+msgstr ""
+
+#: patterns/newsletter-signup.php:43
+msgid "Your email address..."
+msgstr ""
+
+#: patterns/newsletter-signup.php:43
+msgid "Email Address"
+msgstr ""
+
+#: patterns/newsletter-signup.php:43
+msgid "Claim 10% Off"
+msgstr ""
+
+#: patterns/faq-accordion.php:25
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: patterns/faq-accordion.php:29
+msgid "Everything you need to know about our products, shipping, and guarantees."
+msgstr ""
+
+#: patterns/faq-accordion.php:37
+msgid "How fast is express delivery?"
+msgstr ""
+
+#: patterns/faq-accordion.php:39
+msgid "Orders are dispatched within 24 hours. Domestic express orders typically arrive within 2-3 business days with real-time tracking provided."
+msgstr ""
+
+#: patterns/faq-accordion.php:46
+msgid "What is your return policy?"
+msgstr ""
+
+#: patterns/faq-accordion.php:48
+msgid "We offer a 30-day money-back guarantee. If you are not 100% satisfied with your item, you can return it hassle-free for a full refund."
+msgstr ""
+
+#: patterns/faq-accordion.php:58
+msgid "Are transactions secure?"
+msgstr ""
+
+#: patterns/faq-accordion.php:60
+msgid "Yes. All payments are encrypted using 256-bit bank-grade SSL security. We never store credit card numbers on our servers."
+msgstr ""
+
+#: patterns/faq-accordion.php:67
+msgid "How do I qualify for Free Shipping?"
+msgstr ""
+
+#: patterns/faq-accordion.php:69
+msgid "Free standard shipping is automatically applied at checkout once your cart total reaches $75 or more. Track your progress via the live cart bar."
+msgstr ""
+
+#: patterns/hero-banner.php:26
+msgid "New Season Collection"
+msgstr ""
+
+#: templates/front-page.html:17
+msgid "Trending Now"
+msgstr ""
+
+#: templates/front-page.html:20
+msgid "Handpicked store essentials customer favorites this week."
+msgstr ""
+
+#: templates/front-page.html:24
+msgid "View All Products &rarr;"
+msgstr ""
+
+#: templates/front-page.html:50
+msgid "Add products to your WooCommerce store to feature them here."
+msgstr ""
+
+#: functions.php:215
+msgid "Cart updated."
+msgstr ""
+
+#: functions.php:216
+#: functions.php:427
+msgid "Item removed from cart."
+msgstr ""
+
+#: functions.php:398
+msgid "Item not found in cart."
+msgstr ""
+
+#: functions.php:402
+msgid "Could not remove item from cart."
+msgstr ""
+
+

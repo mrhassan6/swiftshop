@@ -1,0 +1,942 @@
+/**
+ * SwiftShop - WooCommerce Ultra-Light Performance & Conversion Stylesheet
+ *
+ * @package SwiftShop
+ * @license GPL-2.0-or-later
+ */
+
+/* ==========================================================================
+   1. Product Grid & Card Performance (Zero Layout Shift)
+   ========================================================================== */
+.wc-block-grid__product,
+.woocommerce ul.products li.product {
+	display: flex;
+	flex-direction: column;
+	background: var(--wp--preset--color--base, #ffffff);
+	border: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	border-radius: 8px;
+	padding: 1rem;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.wc-block-grid__product:hover,
+.woocommerce ul.products li.product:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+	border-color: #cbd5e1;
+}
+
+/* Prevent CLS on product images */
+.wc-block-grid__product-image,
+.woocommerce ul.products li.product a img,
+.woocommerce-product-gallery__image img {
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	width: 100%;
+	height: auto;
+	border-radius: 6px;
+	display: block;
+}
+
+/* Modern Pill Sale Badge */
+.woocommerce span.onsale,
+.wc-block-grid__product-onsale {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	background: var(--wp--preset--color--danger, #ef4444);
+	color: #ffffff;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	padding: 0.25rem 0.65rem;
+	border-radius: 9999px;
+	line-height: 1;
+	z-index: 2;
+	box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35);
+}
+
+/* Product Titles */
+.wc-block-grid__product-title,
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast, #1e293b);
+	margin: 0.75rem 0 0.25rem 0;
+	line-height: 1.35;
+}
+
+/* Pricing Typography */
+.wc-block-grid__product-price,
+.woocommerce ul.products li.product .price,
+.woocommerce div.product p.price {
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast, #1e293b);
+	font-size: 1.125rem;
+	margin-bottom: 0.75rem;
+}
+
+.woocommerce ul.products li.product .price del,
+.woocommerce div.product p.price del {
+	color: var(--wp--preset--color--text-muted, #64748b);
+	font-weight: 400;
+	margin-right: 0.35rem;
+	font-size: 0.95em;
+}
+
+.woocommerce ul.products li.product .price ins,
+.woocommerce div.product p.price ins {
+	text-decoration: none;
+	color: var(--wp--preset--color--danger, #ef4444);
+}
+
+/* Add to cart button within loop */
+.woocommerce ul.products li.product .button,
+.wc-block-grid__product-add-to-cart a {
+	margin-top: auto;
+	width: 100%;
+	text-align: center;
+	padding: 0.6rem 1rem;
+	border-radius: 6px;
+	background-color: var(--wp--preset--color--primary, #2563eb);
+	color: #ffffff;
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-decoration: none;
+	display: inline-block;
+	transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.woocommerce ul.products li.product .button:hover,
+.wc-block-grid__product-add-to-cart a:hover {
+	background-color: var(--wp--preset--color--primary-hover, #1d4ed8);
+	transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   2. Slide-Out Ajax Cart Drawer
+   ========================================================================== */
+.swiftshop-cart-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(30, 41, 59, 0.22);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	z-index: 99998;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.swiftshop-cart-backdrop.is-active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.swiftshop-cart-drawer {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 100%;
+	max-width: 420px;
+	height: 100vh;
+	background: var(--wp--preset--color--base, #ffffff);
+	z-index: 99999;
+	box-shadow: -8px 0 32px rgba(30, 41, 59, 0.08);
+	display: flex;
+	flex-direction: column;
+	transform: translateX(100%);
+	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: transform;
+}
+
+.swiftshop-cart-drawer.is-open {
+	transform: translateX(0);
+}
+
+.swiftshop-drawer-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid var(--wp--preset--color--border, #e2e8f0);
+}
+
+.swiftshop-drawer-title {
+	font-size: 1.125rem;
+	font-weight: 700;
+	margin: 0;
+	color: var(--wp--preset--color--contrast, #1e293b);
+}
+
+.swiftshop-drawer-close {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem;
+	border-radius: 6px;
+	color: var(--wp--preset--color--text-muted, #64748b);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.swiftshop-drawer-close:hover {
+	background: var(--wp--preset--color--surface-subtle, #f1f5f9);
+	color: var(--wp--preset--color--contrast, #1e293b);
+}
+
+.swiftshop-drawer-body {
+	flex: 1 1 auto;
+	overflow-y: auto;
+	padding: 1rem 1.5rem;
+}
+
+.swiftshop-drawer-items-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.swiftshop-drawer-item {
+	display: grid;
+	grid-template-columns: 64px 1fr;
+	gap: 1rem;
+	padding: 1rem 0;
+	border-bottom: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	align-items: center;
+}
+
+.swiftshop-drawer-item:last-child {
+	border-bottom: none;
+}
+
+.swiftshop-item-image img {
+	width: 64px;
+	height: 64px;
+	object-fit: cover;
+	border-radius: 6px;
+}
+
+.swiftshop-item-title {
+	font-size: 0.875rem;
+	font-weight: 600;
+	margin: 0 0 0.25rem 0;
+	line-height: 1.3;
+}
+
+.swiftshop-item-title a {
+	color: var(--wp--preset--color--contrast, #1e293b);
+	text-decoration: none;
+}
+
+.swiftshop-item-title a:hover {
+	color: var(--wp--preset--color--primary, #2563eb);
+}
+
+.swiftshop-item-meta {
+	font-size: 0.8125rem;
+	color: var(--wp--preset--color--text-muted, #64748b);
+	display: flex;
+	gap: 0.5rem;
+}
+
+.swiftshop-item-remove {
+	font-size: 0.75rem;
+	color: var(--wp--preset--color--danger, #ef4444);
+	text-decoration: none;
+	margin-top: 0.25rem;
+	display: inline-block;
+}
+
+.swiftshop-cart-empty-state {
+	text-align: center;
+	padding: 3rem 1rem;
+	color: var(--wp--preset--color--text-muted, #64748b);
+}
+
+.swiftshop-empty-icon {
+	stroke: var(--wp--preset--color--text-muted, #94a3b8);
+	margin-bottom: 1rem;
+}
+
+.swiftshop-cart-empty-text {
+	font-size: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.swiftshop-drawer-footer {
+	padding: 1.25rem 1.5rem;
+	border-top: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	background: var(--wp--preset--color--surface, #f8fafc);
+}
+
+.swiftshop-drawer-subtotal-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast, #1e293b);
+	margin-bottom: 0.5rem;
+}
+
+.swiftshop-drawer-tax-notice {
+	font-size: 0.75rem;
+	color: var(--wp--preset--color--text-muted, #64748b);
+	margin-bottom: 1rem;
+}
+
+.swiftshop-drawer-checkout-btn {
+	display: block;
+	width: 100%;
+	text-align: center;
+	background: var(--wp--preset--color--secondary-accent, #059669);
+	color: #ffffff;
+	padding: 0.875rem 1.25rem;
+	font-weight: 700;
+	border-radius: 6px;
+	text-decoration: none;
+	font-size: 1rem;
+	transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.swiftshop-drawer-checkout-btn:hover {
+	background: #047857;
+	transform: translateY(-1px);
+}
+
+.swiftshop-drawer-viewcart-btn {
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin-top: 0.5rem;
+	color: var(--wp--preset--color--text-muted, #64748b);
+	font-size: 0.875rem;
+	text-decoration: underline;
+}
+
+/* Dynamic Live Cart Badge */
+.swiftshop-cart-trigger {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem;
+	color: var(--wp--preset--color--contrast, #1e293b);
+}
+
+.swiftshop-cart-badge {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: var(--wp--preset--color--secondary-accent, #059669);
+	color: #ffffff;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 4px;
+	border-radius: 9999px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+}
+
+/* ==========================================================================
+   3. Conversion Feature: Free Shipping Progress Bar
+   ========================================================================== */
+.swiftshop-free-shipping-bar {
+	background: var(--wp--preset--color--surface, #f8fafc);
+	border: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	border-radius: 8px;
+	padding: 0.875rem 1rem;
+	margin-bottom: 1.25rem;
+}
+
+.swiftshop-fs-message {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast, #1e293b);
+	margin-bottom: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.swiftshop-fs-track {
+	width: 100%;
+	height: 8px;
+	background: #e2e8f0;
+	border-radius: 9999px;
+	overflow: hidden;
+}
+
+.swiftshop-fs-fill {
+	height: 100%;
+	background: linear-gradient(90deg, #2563eb 0%, #059669 100%);
+	border-radius: 9999px;
+	width: 0%;
+	transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.swiftshop-fs-fill.is-unlocked {
+	background: var(--wp--preset--color--secondary-accent, #059669);
+}
+
+/* ==========================================================================
+   4. Conversion Feature: Trust Badges & Secure Checkout Strip
+   ========================================================================== */
+.swiftshop-trust-badges {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.75rem;
+	padding: 1rem 0;
+	border-top: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	border-bottom: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	margin: 1.5rem 0;
+}
+
+@media (min-width: 640px) {
+	.swiftshop-trust-badges {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.swiftshop-badge-item {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.swiftshop-badge-icon {
+	flex-shrink: 0;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: var(--wp--preset--color--surface-subtle, #f1f5f9);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--wp--preset--color--primary, #2563eb);
+}
+
+.swiftshop-badge-text h5 {
+	margin: 0;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast, #1e293b);
+}
+
+.swiftshop-badge-text p {
+	margin: 0;
+	font-size: 0.6875rem;
+	color: var(--wp--preset--color--text-muted, #64748b);
+}
+
+/* ==========================================================================
+   5. Conversion Feature: Sticky Mobile "Add to Cart" Bar
+   ========================================================================== */
+.swiftshop-sticky-bar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: var(--wp--preset--color--base, #ffffff);
+	border-top: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	box-shadow: 0 -4px 20px rgba(30, 41, 59, 0.06);
+	padding: 0.75rem 1rem;
+	padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+	z-index: 99990;
+	transform: translateY(110%);
+	transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.swiftshop-sticky-bar.is-visible {
+	transform: translateY(0);
+}
+
+.swiftshop-sticky-product-info {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	overflow: hidden;
+}
+
+.swiftshop-sticky-thumbnail {
+	width: 44px;
+	height: 44px;
+	object-fit: cover;
+	border-radius: 4px;
+	flex-shrink: 0;
+}
+
+.swiftshop-sticky-title {
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast, #1e293b);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 0;
+}
+
+.swiftshop-sticky-price {
+	font-size: 0.8125rem;
+	font-weight: 700;
+	color: var(--wp--preset--color--secondary-accent, #059669);
+	margin: 0;
+}
+
+.swiftshop-sticky-cta {
+	flex-shrink: 0;
+	background: var(--wp--preset--color--secondary-accent, #059669);
+	color: #ffffff;
+	font-size: 0.875rem;
+	font-weight: 700;
+	padding: 0.65rem 1.25rem;
+	border-radius: 6px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	white-space: nowrap;
+}
+
+.swiftshop-sticky-cta:hover {
+	background: #047857;
+}
+
+@media (min-width: 1024px) {
+	/* Keep sticky bar focused on mobile/tablet viewports */
+	.swiftshop-sticky-bar {
+		display: none;
+	}
+}
+
+/* ==========================================================================
+   6. WooCommerce Alerts & Notices (Modern Sleek Cards)
+   ========================================================================== */
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+	padding: 1rem 1.25rem 1rem 3rem;
+	margin: 0 0 1.5rem 0;
+	position: relative;
+	border-radius: 8px;
+	list-style: none outside;
+	font-size: 0.925rem;
+	font-weight: 500;
+	line-height: 1.4;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.woocommerce-message {
+	background: #ecfdf5;
+	color: #065f46;
+	border: 1px solid #a7f3d0;
+}
+
+.woocommerce-info {
+	background: #eff6ff;
+	color: #1e40af;
+	border: 1px solid #bfdbfe;
+}
+
+.woocommerce-error {
+	background: #fef2f2;
+	color: #991b1b;
+	border: 1px solid #fecaca;
+}
+
+.woocommerce-message .button,
+.woocommerce-info .button {
+	float: right;
+	padding: 0.35rem 0.85rem;
+	font-size: 0.8125rem;
+	border-radius: 6px;
+	margin-top: -2px;
+}
+
+/* ==========================================================================
+   7. Star Ratings
+   ========================================================================== */
+.star-rating,
+.wc-block-components-product-rating__stars {
+	overflow: hidden;
+	position: relative;
+	height: 1.2em;
+	line-height: 1.2em;
+	font-size: 0.875rem;
+	font-family: inherit;
+	color: #f59e0b;
+	letter-spacing: 0.15em;
+}
+
+.star-rating::before {
+	content: "★★★★★";
+	opacity: 0.25;
+	float: left;
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+.star-rating span {
+	overflow: hidden;
+	float: left;
+	top: 0;
+	left: 0;
+	position: absolute;
+	padding-top: 1.5em;
+}
+
+.star-rating span::before {
+	content: "★★★★★";
+	top: 0;
+	position: absolute;
+	left: 0;
+}
+
+/* ==========================================================================
+   8. Quantity Selector & Single Product Controls
+   ========================================================================== */
+.quantity {
+	display: inline-flex;
+	align-items: center;
+	border: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	border-radius: 6px;
+	overflow: hidden;
+	margin-right: 0.75rem;
+}
+
+.quantity .qty {
+	width: 3.5rem;
+	height: 2.75rem;
+	text-align: center;
+	border: none;
+	background: transparent;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast, #1e293b);
+	outline: none;
+}
+
+.single_add_to_cart_button {
+	height: 2.75rem;
+	padding: 0 2rem;
+	font-weight: 700;
+	font-size: 1rem;
+	border-radius: 6px;
+	background: var(--wp--preset--color--primary, #2563eb);
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.single_add_to_cart_button:hover {
+	background: var(--wp--preset--color--primary-hover, #1d4ed8);
+	transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   9. WooCommerce Tabs
+   ========================================================================== */
+.woocommerce-tabs ul.tabs {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 1.5rem 0;
+	display: flex;
+	gap: 1.5rem;
+	border-bottom: 2px solid var(--wp--preset--color--border, #e2e8f0);
+}
+
+.woocommerce-tabs ul.tabs li {
+	display: inline-block;
+	margin: 0;
+	padding: 0 0 0.75rem 0;
+	position: relative;
+}
+
+.woocommerce-tabs ul.tabs li a {
+	color: var(--wp--preset--color--text-muted, #64748b);
+	font-weight: 600;
+	text-decoration: none;
+	font-size: 1rem;
+	transition: color 0.2s ease;
+}
+
+.woocommerce-tabs ul.tabs li.active a,
+.woocommerce-tabs ul.tabs li a:hover {
+	color: var(--wp--preset--color--primary, #2563eb);
+}
+
+.woocommerce-tabs ul.tabs li.active::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--wp--preset--color--primary, #2563eb);
+}
+
+.woocommerce-Tabs-panel {
+	line-height: 1.7;
+	color: var(--wp--preset--color--text-muted, #475569);
+	font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   10. Breadcrumbs
+   ========================================================================== */
+.woocommerce-breadcrumb {
+	font-size: 0.8125rem;
+	color: var(--wp--preset--color--text-muted, #64748b);
+	margin-bottom: 1.5rem;
+}
+
+.woocommerce-breadcrumb a {
+	color: var(--wp--preset--color--text-muted, #64748b);
+	text-decoration: none;
+}
+
+.woocommerce-breadcrumb a:hover {
+	color: var(--wp--preset--color--primary, #2563eb);
+}
+
+/* ==========================================================================
+   11. Screen Reader Accessibility Utility (WCAG 2.1 AA)
+   ========================================================================== */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+/* ==========================================================================
+   12. Mobile Menu Isolation & Sticky Bar Safety
+   ========================================================================== */
+body.has-modal-open .swiftshop-sticky-bar,
+.is-menu-open .swiftshop-sticky-bar,
+.wp-block-navigation__responsive-container.is-menu-open ~ .swiftshop-sticky-bar {
+	display: none !important;
+}
+
+/* Touch target minimum size for mobile accessibility (Core Web Vitals) */
+@media (max-width: 768px) {
+	.swiftshop-cart-trigger,
+	.swiftshop-drawer-close,
+	.swiftshop-sticky-cta {
+		min-height: 44px;
+		min-width: 44px;
+	}
+}
+
+/* ==========================================================================
+   13. WooCommerce Product Gallery Thumbnails (Zero CLS)
+   ========================================================================== */
+.woocommerce-product-gallery ol.flex-control-nav.flex-control-thumbs {
+	display: flex;
+	gap: 0.625rem;
+	margin-top: 0.75rem;
+	padding: 0;
+	list-style: none;
+	overflow-x: auto;
+}
+
+.woocommerce-product-gallery ol.flex-control-nav.flex-control-thumbs li {
+	flex: 0 0 68px;
+	cursor: pointer;
+}
+
+.woocommerce-product-gallery ol.flex-control-nav.flex-control-thumbs li img {
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	border-radius: 4px;
+	border: 2px solid transparent;
+	transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.woocommerce-product-gallery ol.flex-control-nav.flex-control-thumbs li img.flex-active,
+.woocommerce-product-gallery ol.flex-control-nav.flex-control-thumbs li img:hover {
+	border-color: var(--wp--preset--color--primary, #2563eb);
+}
+
+/* ==========================================================================
+   14. WooCommerce Cart & Checkout Native Blocks Harmony
+   ========================================================================== */
+.wc-block-checkout,
+.wc-block-cart {
+	margin-top: 1rem;
+	margin-bottom: 2.5rem;
+}
+
+.wc-block-components-checkout-place-order-button {
+	background-color: var(--wp--preset--color--secondary-accent, #059669) !important;
+	color: #ffffff !important;
+	font-weight: 700 !important;
+	border-radius: 6px !important;
+	padding: 1rem 1.5rem !important;
+	font-size: 1.05rem !important;
+	transition: background-color 0.2s ease, transform 0.15s ease !important;
+}
+
+.wc-block-components-checkout-place-order-button:hover {
+	background-color: #047857 !important;
+	transform: translateY(-1px);
+}
+
+.wc-block-components-text-input input,
+.wc-block-components-combobox input {
+	border-radius: 6px !important;
+	border: 1px solid var(--wp--preset--color--border, #e2e8f0) !important;
+}
+
+.wc-block-components-text-input input:focus,
+.wc-block-components-combobox input:focus {
+	outline: 2px solid var(--wp--preset--color--primary, #2563eb) !important;
+	outline-offset: 1px;
+}
+
+/* ==========================================================================
+   15. Mobile-First Responsive E-Commerce Architecture (320px to 768px)
+   ========================================================================== */
+
+/* Prevent horizontal page overflow across all mobile screens */
+html,
+body {
+	overflow-x: hidden;
+	max-width: 100vw;
+}
+
+/* Top Announcement Bar Mobile Polish */
+@media (max-width: 640px) {
+	.swiftshop-top-bar {
+		text-align: center;
+		justify-content: center;
+	}
+	.swiftshop-top-bar-links {
+		display: none !important;
+	}
+}
+
+/* 2-Column Catalog Grid on Smartphones (Shopify/Amazon-standard mobile commerce) */
+@media (max-width: 640px) {
+	.wp-block-post-template.is-layout-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+		gap: 0.75rem !important;
+	}
+	.wc-block-grid__products,
+	.woocommerce ul.products {
+		display: grid !important;
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+		gap: 0.75rem !important;
+	}
+	.woocommerce ul.products li.product {
+		width: 100% !important;
+		margin: 0 !important;
+		padding: 0.75rem !important;
+	}
+	.woocommerce ul.products li.product .woocommerce-loop-product__title,
+	.wc-block-grid__product-title {
+		font-size: 0.875rem !important;
+	}
+	.woocommerce ul.products li.product .price,
+	.wc-block-grid__product-price {
+		font-size: 0.95rem !important;
+		margin-bottom: 0.5rem !important;
+	}
+}
+
+/* Single Column Grid for Extra Narrow Phones (<=360px) */
+@media (max-width: 360px) {
+	.wp-block-post-template.is-layout-grid,
+	.wc-block-grid__products,
+	.woocommerce ul.products {
+		grid-template-columns: 1fr !important;
+	}
+}
+
+/* Slide-out Cart Drawer Mobile Viewport Adaptation */
+@media (max-width: 480px) {
+	.swiftshop-cart-drawer {
+		max-width: 100vw;
+	}
+	.swiftshop-drawer-header,
+	.swiftshop-drawer-body,
+	.swiftshop-drawer-footer {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+}
+
+/* Safe Area Inset for Modern iPhones Home Indicator Bar */
+.swiftshop-drawer-footer {
+	padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+/* Newsletter Form Mobile Stacking */
+.swiftshop-newsletter-form {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.swiftshop-newsletter-form input {
+	flex: 1 1 200px;
+	min-width: 0;
+}
+
+@media (max-width: 480px) {
+	.swiftshop-newsletter-form input,
+	.swiftshop-newsletter-form button {
+		width: 100% !important;
+		flex: 1 1 100% !important;
+	}
+}
+
+/* Sticky Purchase Bar Extra-Narrow Smartphone Optimization */
+@media (max-width: 360px) {
+	.swiftshop-sticky-bar {
+		padding: 0.5rem 0.75rem;
+		gap: 0.5rem;
+	}
+	.swiftshop-sticky-thumbnail {
+		width: 36px;
+		height: 36px;
+	}
+	.swiftshop-sticky-title {
+		font-size: 0.75rem;
+	}
+	.swiftshop-sticky-cta {
+		padding: 0.5rem 0.85rem;
+		font-size: 0.8125rem;
+	}
+}
+
+
+

@@ -1,0 +1,130 @@
+/*
+Theme Name: SwiftShop
+Theme URI: https://github.com/swiftshop/swiftshop
+Author: SwiftShop Core Team
+Author URI: https://swiftshop.dev
+Description: Production-ready, ultra-fast, mobile-first WooCommerce Block Theme (FSE) built for maximum conversions, Core Web Vitals optimization, and modern block-based commerce. Zero jQuery dependencies.
+Requires at least: 6.5
+Tested up to: 6.7
+Requires PHP: 7.4
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: swiftshop
+Tags: block-themes, e-commerce, grid-layout, full-site-editing, wide-blocks, block-patterns, custom-colors, custom-typography, featured-images, threaded-comments, translation-ready
+
+SwiftShop WordPress Theme, Copyright (C) 2026 SwiftShop Core Team
+SwiftShop is distributed under the terms of the GNU GPL.
+*/
+
+/**
+ * 1. Base Reset & Accessibility
+ */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip link for screen reader accessibility */
+.skip-to-content-link {
+	position: absolute;
+	top: -9999px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: var(--wp--preset--color--primary, #2563eb);
+	color: var(--wp--preset--color--base, #ffffff);
+	padding: 0.75rem 1.5rem;
+	border-radius: 0 0 6px 6px;
+	z-index: 100000;
+	font-weight: 600;
+	text-decoration: none;
+	transition: top 0.2s ease-in-out;
+}
+
+.skip-to-content-link:focus {
+	top: 0;
+	outline: 3px solid var(--wp--preset--color--primary, #2563eb);
+	outline-offset: 2px;
+}
+
+/* Global focus visibility */
+:focus-visible {
+	outline: 2px solid var(--wp--preset--color--primary, #2563eb);
+	outline-offset: 2px;
+}
+
+/* Zero Cumulative Layout Shift (CLS) Media Preservation */
+img,
+video,
+iframe {
+	max-width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+/* Modern clean button styles */
+.wp-element-button,
+.wp-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	line-height: 1.25;
+	border-radius: 6px;
+	transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.wp-element-button:hover,
+.wp-block-button__link:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.wp-element-button:active,
+.wp-block-button__link:active {
+	transform: translateY(0);
+}
+
+/* ==========================================================================
+   2. Registered Custom Block Styles
+   ========================================================================== */
+.is-style-swiftshop-pill .wp-element-button,
+.is-style-swiftshop-pill.wp-element-button,
+.wp-block-button.is-style-swiftshop-pill .wp-block-button__link {
+	border-radius: 9999px !important;
+}
+
+.is-style-swiftshop-outline .wp-element-button,
+.is-style-swiftshop-outline.wp-element-button,
+.wp-block-button.is-style-swiftshop-outline .wp-block-button__link {
+	background: transparent !important;
+	border: 2px solid currentColor !important;
+}
+
+.is-style-swiftshop-card {
+	border: 1px solid var(--wp--preset--color--border, #e2e8f0);
+	border-radius: 12px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.is-style-swiftshop-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
